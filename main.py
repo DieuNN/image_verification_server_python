@@ -29,6 +29,12 @@ def register():
     for file_name in os.listdir('uploads'):
         image = cv2.imread(os.path.join("uploads", file_name))
         images.append(image)
+
+    ## check if this user exist
+    username = face_recognition.face_recognition(images)
+    if username != 'unknown':
+        return jsonify({'message': "You already registered as " + username})
+
     # cropping images
     cropped_faces = face_sampling.face_sampling(images, name)
     # trainning
