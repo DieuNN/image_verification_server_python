@@ -13,6 +13,9 @@ from face_learning import face_learning
 app = Flask(__name__)
 load_dotenv()
 
+@app.route('/healthz')
+def health_check():
+    return "OK", 200
 
 @app.route('/register', methods=["POST"])
 def register():
